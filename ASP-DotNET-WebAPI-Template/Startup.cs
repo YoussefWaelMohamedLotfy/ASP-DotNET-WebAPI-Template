@@ -30,7 +30,7 @@ namespace ASP_DotNET_WebAPI_Template
         }
 
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services to the DI container.
         public void ConfigureServices(IServiceCollection services)
         {
             // Configuring SQL Server
@@ -56,7 +56,7 @@ namespace ASP_DotNET_WebAPI_Template
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -77,6 +77,12 @@ namespace ASP_DotNET_WebAPI_Template
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // Built-in Exception Handling Middleware
+            app.ConfigureBuiltInExceptionHandler(loggerFactory);
+
+            // Custom Exception Handling Middleware
+            //app.ConfigureCustomExceptionHandler();
 
             app.UseEndpoints(endpoints =>
             {

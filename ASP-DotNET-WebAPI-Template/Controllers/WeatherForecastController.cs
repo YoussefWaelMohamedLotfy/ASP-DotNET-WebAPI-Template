@@ -42,7 +42,6 @@ namespace ASP_DotNET_WebAPI_Template.Controllers
             .ToArray();
 
             var dto = _mapper.Map<IEnumerable<GetForecastDTO>>(forecasts);
-
             return dto;
         }
     }
