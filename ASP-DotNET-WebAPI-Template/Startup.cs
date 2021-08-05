@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASP_DotNET_WebAPI_Template.DbContexts;
 using ASP_DotNET_WebAPI_Template.Extensions;
+using AspNetCoreRateLimit;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +43,10 @@ namespace ASP_DotNET_WebAPI_Template
             // Configuring Caching
             services.ConfigureHttpCacheHeaders();
 
+            // Configuring Rate Limiting and Throttling
+            services.AddMemoryCache();
+            services.ConfigureRateLimiting();
+
             services.AddControllers();
             
             services.AddSwaggerGen(c =>
@@ -64,6 +70,9 @@ namespace ASP_DotNET_WebAPI_Template
             // Caching Middleware
             app.UseResponseCaching();
             app.UseHttpCacheHeaders();
+
+            // Rate Limit Middleware
+            app.UseIpRateLimiting();
 
             app.UseRouting();
 
