@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASP_DotNET_WebAPI_Template.DbContexts;
 using ASP_DotNET_WebAPI_Template.Extensions;
+using ASP_DotNET_WebAPI_Template.Repositories;
+using ASP_DotNET_WebAPI_Template.Repositories.Interfaces;
 using AspNetCoreRateLimit;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -29,7 +31,6 @@ namespace ASP_DotNET_WebAPI_Template
             Configuration = configuration;
         }
 
-
         // This method gets called by the runtime. Use this method to add services to the DI container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -46,6 +47,11 @@ namespace ASP_DotNET_WebAPI_Template
             // Configuring Rate Limiting and Throttling
             services.AddMemoryCache();
             services.ConfigureRateLimiting();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Configuring App Services
+            services.ConfigureAppServices();
 
             services.AddControllers();
             
