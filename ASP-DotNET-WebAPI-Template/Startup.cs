@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ASP_DotNET_WebAPI_Template.DbContexts;
+using ASP_DotNET_WebAPI_Template.Extensions;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +38,11 @@ namespace ASP_DotNET_WebAPI_Template
             // Configuring AutoMapper
             services.AddAutoMapper(typeof(Startup));
 
+            // Configuring Caching
+            services.ConfigureHttpCacheHeaders();
+
             services.AddControllers();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ASP.NET Core Web API Template", Version = "v1" });
@@ -55,6 +60,10 @@ namespace ASP_DotNET_WebAPI_Template
             }
 
             app.UseHttpsRedirection();
+
+            // Caching Middleware
+            app.UseResponseCaching();
+            app.UseHttpCacheHeaders();
 
             app.UseRouting();
 
