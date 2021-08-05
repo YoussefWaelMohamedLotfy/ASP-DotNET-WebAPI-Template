@@ -4,9 +4,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using ASP_DotNET_WebAPI_Template.DbContexts;
+using ASP_DotNET_WebAPI_Template.Models;
 using ASP_DotNET_WebAPI_Template.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using X.PagedList;
 
 namespace ASP_DotNET_WebAPI_Template.Repositories
 {
@@ -56,6 +58,16 @@ namespace ASP_DotNET_WebAPI_Template.Repositories
                 query = orderBy(query);
 
             return await query.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<IPagedList<T>> GetPagedList(RequestParams requestParams, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+        {
+            IQueryable<T> query = _db;
+
+            if (include != null)
+                query = include(query);
+
+            return await query.AsNoTracking().ToPagedListAsync(requestParams.PageNumber, requestParams.PageNumber);
         }
 
         public async Task Insert(T entity)

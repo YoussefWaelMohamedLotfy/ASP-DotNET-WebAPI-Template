@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using ASP_DotNET_WebAPI_Template.Models;
 using Microsoft.EntityFrameworkCore.Query;
+using X.PagedList;
 
 namespace ASP_DotNET_WebAPI_Template.Repositories.Interfaces
 {
@@ -11,7 +13,9 @@ namespace ASP_DotNET_WebAPI_Template.Repositories.Interfaces
     {
         Task<IList<T>> GetAll(Expression<Func<T, bool>> expression = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-            Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null); 
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
+
+        Task<IPagedList<T>> GetPagedList(RequestParams requestParams, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
 
         Task<T> Get(Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
 
