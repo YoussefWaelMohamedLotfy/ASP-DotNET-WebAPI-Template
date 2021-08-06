@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASP_DotNET_WebAPI_Template.DbContexts;
 using ASP_DotNET_WebAPI_Template.Extensions;
-using ASP_DotNET_WebAPI_Template.Repositories;
-using ASP_DotNET_WebAPI_Template.Repositories.Interfaces;
 using AspNetCoreRateLimit;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -38,6 +36,10 @@ namespace ASP_DotNET_WebAPI_Template
             services.AddDbContext<ApplicationDbContext>(options => 
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            // Configuring JWT Authentication
+            services.AddAuthentication();
+            services.ConfigureIdentity();
+
             // Configuring AutoMapper
             services.AddAutoMapper(typeof(Startup));
 
@@ -47,8 +49,6 @@ namespace ASP_DotNET_WebAPI_Template
             // Configuring Rate Limiting and Throttling
             services.AddMemoryCache();
             services.ConfigureRateLimiting();
-
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // Configuring App Services
             services.ConfigureAppServices();
@@ -82,6 +82,8 @@ namespace ASP_DotNET_WebAPI_Template
 
             app.UseRouting();
 
+            // Authentication Middleware
+            app.UseAuthentication();
             app.UseAuthorization();
 
             // Built-in Exception Handling Middleware
