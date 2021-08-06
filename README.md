@@ -15,7 +15,6 @@
 + Pagination
 + Authentication using JWT Tokens
 + API Versioning
-  + Query Parameters
   + URL-Based
   + HTTP Header-Based
   + HTTP Media Type-Based

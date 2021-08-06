@@ -8,6 +8,8 @@ namespace ASP_DotNET_WebAPI_Template.Repositories.Interfaces
     {
         IGenericRepository<Log> Logs { get; }
 
+        IGenericRepository<WeatherForecast> WeatherForecasts { get; }
+
         Task<int> SaveChangesAsync();
     }
 }

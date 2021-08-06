@@ -11,6 +11,7 @@ namespace ASP_DotNET_WebAPI_Template.Repositories
         private readonly ApplicationDbContext _context;
 
         private IGenericRepository<Log> _logs { get; }
+        private IGenericRepository<WeatherForecast> _weatherForecasts { get; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -18,6 +19,7 @@ namespace ASP_DotNET_WebAPI_Template.Repositories
         }
 
         public IGenericRepository<Log> Logs => _logs ?? new GenericRepository<Log>(_context);
+        public IGenericRepository<WeatherForecast> WeatherForecasts => _weatherForecasts ?? new GenericRepository<WeatherForecast>(_context);
 
         public void Dispose()
         {

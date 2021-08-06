@@ -12,7 +12,7 @@ namespace ASP_DotNET_WebAPI_Template.Controllers
 {
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
