@@ -53,6 +53,9 @@ namespace ASP_DotNET_WebAPI_Template
             // Configuring App Services
             services.ConfigureAppServices();
 
+            // Configuring API Versioning
+            services.ConfigureApiVersioning();
+
             services.AddControllers();
             
             services.AddSwaggerGen(c =>

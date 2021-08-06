@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ASP_DotNET_WebAPI_Template.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
     [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase

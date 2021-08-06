@@ -7,6 +7,15 @@
 + AutoMapper
 + Caching
 + Logging (Serilog)
+  + Console
+  + File
+  + MS SQL Server
 + Rate Limiting and Throttling
 + Global Exception Handling (Built-in + Custom)
 + Pagination
++ Authentication using JWT Tokens
++ API Versioning
+  + Query Parameters
+  + URL-Based
+  + HTTP Header-Based
+  + HTTP Media Type-Based
