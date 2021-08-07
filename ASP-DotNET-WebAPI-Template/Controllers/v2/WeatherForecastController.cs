@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ASP_DotNET_WebAPI_Template.DTOs;
 using ASP_DotNET_WebAPI_Template.Repositories.Interfaces;
 using ASP_DotNET_WebAPI_Template.Services;
@@ -24,27 +25,39 @@ namespace ASP_DotNET_WebAPI_Template.Controllers.v2
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetForecastById(int id)
+        public async Task<IActionResult> GetForecastById(int id)
         {
             _logger.LogInformation($"Called Route: {nameof(GetForecastById)}:{id}");
-            return Ok(_service.GetForecastById(id));
+
+            var forecast = await _service.GetForecastById(id);
+
+            if (forecast == null)
+                return NotFound();
+
+            return Ok(forecast);
         }
 
         [HttpPost]
-        public IActionResult InsertForecast([FromBody] CreateForecastDto dto)
+        public async Task<IActionResult> InsertForecast([FromBody] CreateForecastDto dto)
         {
             _logger.LogInformation($"Called Route: {nameof(InsertForecast)}");
-            _service.AddForecast(dto);
+            await _service.AddForecast(dto);
             return Ok("Created Successfully");
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult DeleteForecast(int id)
+        public async Task<IActionResult> DeleteForecast(int id)
         {
             _logger.LogInformation($"Called Route: {nameof(DeleteForecast)}:{id}");
-            _service.DeleteForecast(id);
-            return Ok();
+
+            var forecast = await _service.GetForecastById(id);
+
+            if (forecast == null)
+                return NotFound();
+
+            await _service.DeleteForecast(id);
+            return Ok(new { Message = "Delete Success" });
         }
     }
 }

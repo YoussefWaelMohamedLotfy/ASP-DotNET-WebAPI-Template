@@ -76,7 +76,8 @@ namespace ASP_DotNET_WebAPI_Template.Services
 
         private SigningCredentials GetSigningCredentials()
         {
-            var key = Environment.GetEnvironmentVariable("KEY");
+            // Key should be at least 16 characters, preferably to be saved in an Environment Variable
+            var key = "YOUR_SUPER_SECRET_KEY";
             var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
 
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);

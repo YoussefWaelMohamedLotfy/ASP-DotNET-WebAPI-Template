@@ -1,6 +1,7 @@
 using ASP_DotNET_WebAPI_Template.Models;
 using ASP_DotNET_WebAPI_Template.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ASP_DotNET_WebAPI_Template.Controllers
 {
@@ -16,9 +17,9 @@ namespace ASP_DotNET_WebAPI_Template.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetLogs([FromQuery] RequestParams param)
+        public async Task<IActionResult> GetLogs([FromQuery] RequestParams param)
         {
-            var logs = _service.GetPaginatedLogs(param);
+            var logs = await _service.GetPaginatedLogs(param);
             return Ok(logs);
         }
     }

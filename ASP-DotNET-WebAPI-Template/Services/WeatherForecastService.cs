@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ASP_DotNET_WebAPI_Template.DTOs;
 using ASP_DotNET_WebAPI_Template.Models;
 using ASP_DotNET_WebAPI_Template.Repositories.Interfaces;
@@ -20,21 +21,22 @@ namespace ASP_DotNET_WebAPI_Template.Services
             _mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
         }
 
-        public IEnumerable<GetForecastDTO> GetForecastById(int id)
+        public async Task<GetForecastDTO> GetForecastById(int id)
         {
             _logger.LogInformation($"Invoked {nameof(GetForecastById)}:{id}");
-            var forecasts = _unit.WeatherForecasts.Get(x => x.ID == id);
-            var dto = _mapper.Map<IEnumerable<GetForecastDTO>>(forecasts);
+            var forecast = await _unit.WeatherForecasts.Get(x => x.ID == id);
+            var dto = _mapper.Map<GetForecastDTO>(forecast);
             return dto;
         }
 
-        public void AddForecast(CreateForecastDto dto)
+        public async Task AddForecast(CreateForecastDto dto)
         {
             var forecast = _mapper.Map<WeatherForecast>(dto);
-            _unit.WeatherForecasts.Insert(forecast);
+            await _unit.WeatherForecasts.Insert(forecast);
+            await _unit.SaveChangesAsync();
         }
 
-        public void DeleteForecast(int id)
+        public async Task DeleteForecast(int id)
         {
             _logger.LogInformation($"Invoked {nameof(DeleteForecast)}:{id}");
             var forecast = _unit.WeatherForecasts.Get(x => x.ID == id);
@@ -42,7 +44,8 @@ namespace ASP_DotNET_WebAPI_Template.Services
             if (forecast == null)
                 return;
 
-            _unit.WeatherForecasts.Delete(id);
+            await _unit.WeatherForecasts.Delete(id);
+            await _unit.SaveChangesAsync();
         }
     }
 }
