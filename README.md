@@ -2,8 +2,10 @@
  A custom template with many features and packages configured for your next Web API project.
 
 ## What is configured
++ Docker Support
 + Entity Framework Core
   + SQL Server Provider
+  + SQLite Provider
 + Repository and Unit of Work Patterns
 + AutoMapper
 + Caching
