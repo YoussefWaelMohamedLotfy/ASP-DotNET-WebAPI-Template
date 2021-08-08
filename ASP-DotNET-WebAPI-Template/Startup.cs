@@ -28,6 +28,10 @@ namespace ASP_DotNET_WebAPI_Template
             services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            // Configuring SQLite
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //        options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+
             // Configuring JWT Authentication
             services.AddAuthentication();
             services.ConfigureIdentity();
@@ -53,7 +57,7 @@ namespace ASP_DotNET_WebAPI_Template
 
             // Configuring Hangfire Server
             services.ConfigureHangfire(Configuration);
-            
+
             services.ConfigureSwagger();
 
             services.AddControllers();
