@@ -1,6 +1,7 @@
 using ASP_DotNET_WebAPI_Template.DbContexts;
 using ASP_DotNET_WebAPI_Template.Extensions;
 using AspNetCoreRateLimit;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +50,9 @@ namespace ASP_DotNET_WebAPI_Template
 
             // Configuring Health Checks
             services.ConfigureHealthChecks(Configuration);
+
+            // Configuring Hangfire Server
+            services.ConfigureHangfire(Configuration);
             
             services.ConfigureSwagger();
 
@@ -93,6 +97,8 @@ namespace ASP_DotNET_WebAPI_Template
 
                 // Health Check Endpoints Middleware
                 endpoints.MapCustomHealthChecks();
+
+                endpoints.MapHangfireDashboard();
             });
         }
     }

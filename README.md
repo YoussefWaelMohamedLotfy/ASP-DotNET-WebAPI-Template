@@ -3,6 +3,7 @@
 
 ## What is configured
 + Entity Framework Core
+  + SQL Server Provider
 + Repository and Unit of Work Patterns
 + AutoMapper
 + Caching
@@ -23,3 +24,5 @@
   + SQL Server
   + URLs
   + Custom Implementation
++ Hangfire (with Dashboard)
+  + SQL Server
