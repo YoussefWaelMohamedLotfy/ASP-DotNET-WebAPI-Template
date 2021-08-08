@@ -18,3 +18,8 @@
   + URL-Based
   + HTTP Header-Based
   + HTTP Media Type-Based
++ Swagger Authorize Annotation
++ Health Checks
+  + SQL Server
+  + URLs
+  + Custom Implementation
