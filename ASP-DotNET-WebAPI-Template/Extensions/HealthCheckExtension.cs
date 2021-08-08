@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using ASP_DotNET_WebAPI_Template.HealthChecks;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -12,11 +13,11 @@ namespace ASP_DotNET_WebAPI_Template.Extensions
         public static void ConfigureHealthChecks(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddHealthChecks()
-                // .AddSqlServer(
-                //     configuration.GetConnectionString("DefaultConnection"),
-                //     name: "SQL Server Check",
-                //     failureStatus: HealthStatus.Unhealthy,
-                //     tags: new[] { "ready" })
+                .AddSqlServer(
+                    configuration.GetConnectionString("DefaultConnection"),
+                    name: "SQL Server Check",
+                    failureStatus: HealthStatus.Unhealthy,
+                    tags: new[] { "ready" })
                 .AddUrlGroup(
                     new Uri("https://www.google.com"),
                     "API Check",
@@ -24,6 +25,18 @@ namespace ASP_DotNET_WebAPI_Template.Extensions
                     timeout: new TimeSpan(0, 0, 5),
                     tags: new[] { "ready" })
                 .AddFileWriteCheck("File Check", HealthStatus.Unhealthy, new[] { "ready" });
+
+                services.AddHealthChecksUI(s => 
+                {
+                    s.UseApiEndpointHttpMessageHandler(sp => 
+                        {
+                            return new HttpClientHandler
+                            {
+                                ClientCertificateOptions = ClientCertificateOption.Manual,
+                                ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => { return true; }
+                            };
+                        });
+                }).AddInMemoryStorage();
         }
     }
 }

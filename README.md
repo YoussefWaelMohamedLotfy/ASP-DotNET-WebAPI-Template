@@ -19,7 +19,7 @@
   + HTTP Header-Based
   + HTTP Media Type-Based
 + Swagger Authorize Annotation
-+ Health Checks
++ Health Checks (UI Supported)
   + SQL Server
   + URLs
   + Custom Implementation
