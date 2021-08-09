@@ -10,15 +10,13 @@ namespace ASP_DotNET_WebAPI_Template.Repositories
     {
         private readonly ApplicationDbContext _context;
 
-        private IGenericRepository<Log> _logs { get; }
         private IGenericRepository<WeatherForecast> _weatherForecasts { get; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
-            _context = context ?? throw new System.ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public IGenericRepository<Log> Logs => _logs ?? new GenericRepository<Log>(_context);
         public IGenericRepository<WeatherForecast> WeatherForecasts => _weatherForecasts ?? new GenericRepository<WeatherForecast>(_context);
 
         public void Dispose()

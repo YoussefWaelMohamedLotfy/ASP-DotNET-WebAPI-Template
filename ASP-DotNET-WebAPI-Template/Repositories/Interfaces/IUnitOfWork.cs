@@ -6,8 +6,6 @@ namespace ASP_DotNET_WebAPI_Template.Repositories.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IGenericRepository<Log> Logs { get; }
-
         IGenericRepository<WeatherForecast> WeatherForecasts { get; }
 
         Task<int> SaveChangesAsync();
