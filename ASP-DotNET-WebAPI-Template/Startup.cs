@@ -58,10 +58,12 @@ namespace ASP_DotNET_WebAPI_Template
             // Configuring Hangfire Server
             services.ConfigureHangfire(Configuration);
 
+            // Configuring Sendgrid
+            services.ConfigureSendGrid(Configuration);
+
             services.ConfigureSwagger();
 
             services.AddControllers();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
