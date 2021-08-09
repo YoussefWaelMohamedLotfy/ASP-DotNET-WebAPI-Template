@@ -17,7 +17,7 @@ namespace ASP_DotNET_WebAPI_Template
             try
             {
                 var configuration = new ConfigurationBuilder()
-                    .AddJsonFile("appsettings.json")
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .Build();
 
                 Log.Logger = new LoggerConfiguration()
@@ -25,7 +25,6 @@ namespace ASP_DotNET_WebAPI_Template
                     .CreateLogger();
 
                 CreateHostBuilder(args).Build().Run();
-
             }
             finally
             {

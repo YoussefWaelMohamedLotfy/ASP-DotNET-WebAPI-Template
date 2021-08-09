@@ -11,7 +11,6 @@ namespace ASP_DotNET_WebAPI_Template.DbContexts
         {
         }
 
-        public DbSet<Log> Logs { get; set; }
         public DbSet<WeatherForecast> WeatherForecasts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
