@@ -14,7 +14,7 @@ namespace ASP_DotNET_WebAPI_Template.Extensions
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAuthManager, AuthManager>();
 
-            services.AddTransient<WeatherForecastService>();
+            services.AddTransient<IWeatherForecastService, WeatherForecastService>();
         }
     }
 }

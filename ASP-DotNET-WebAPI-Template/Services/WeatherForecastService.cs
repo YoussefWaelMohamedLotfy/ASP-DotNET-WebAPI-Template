@@ -1,14 +1,14 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using ASP_DotNET_WebAPI_Template.DTOs;
 using ASP_DotNET_WebAPI_Template.Models;
 using ASP_DotNET_WebAPI_Template.Repositories.Interfaces;
+using ASP_DotNET_WebAPI_Template.Services.Interfaces;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 
 namespace ASP_DotNET_WebAPI_Template.Services
 {
-    public class WeatherForecastService
+    public class WeatherForecastService : IWeatherForecastService
     {
         private readonly ILogger<WeatherForecastService> _logger;
         private readonly IUnitOfWork _unit;
