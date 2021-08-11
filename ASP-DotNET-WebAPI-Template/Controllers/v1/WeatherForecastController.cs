@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using ASP_DotNET_WebAPI_Template.DTOs;
 using ASP_DotNET_WebAPI_Template.Models;
 using ASP_DotNET_WebAPI_Template.Services.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace ASP_DotNET_WebAPI_Template.Controllers
 {
     [ApiVersion("1.0")]
+    [Authorize]
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     public class WeatherForecastController : ControllerBase

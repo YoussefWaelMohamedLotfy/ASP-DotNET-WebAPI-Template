@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using ASP_DotNET_WebAPI_Template.DTOs;
-using ASP_DotNET_WebAPI_Template.Repositories.Interfaces;
 using ASP_DotNET_WebAPI_Template.Services;
-using AutoMapper;
+using ASP_DotNET_WebAPI_Template.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -15,7 +14,7 @@ namespace ASP_DotNET_WebAPI_Template.Controllers.v2
     public class WeatherForecastController : ControllerBase
     {
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly WeatherForecastService _service;
+        private readonly IWeatherForecastService _service;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger, WeatherForecastService service)
         {
@@ -37,6 +36,7 @@ namespace ASP_DotNET_WebAPI_Template.Controllers.v2
             return Ok(forecast);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> InsertForecast([FromBody] CreateForecastDto dto)
         {
@@ -45,6 +45,7 @@ namespace ASP_DotNET_WebAPI_Template.Controllers.v2
             return Ok("Created Successfully");
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> DeleteForecast(int id)
