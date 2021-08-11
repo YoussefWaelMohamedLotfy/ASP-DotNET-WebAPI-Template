@@ -1,6 +1,6 @@
+using System;
 using System.Threading.Tasks;
 using ASP_DotNET_WebAPI_Template.DTOs;
-using ASP_DotNET_WebAPI_Template.Services;
 using ASP_DotNET_WebAPI_Template.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +16,10 @@ namespace ASP_DotNET_WebAPI_Template.Controllers.v2
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IWeatherForecastService _service;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, WeatherForecastService service)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherForecastService service)
         {
-            _logger = logger ?? throw new System.ArgumentNullException(nameof(logger));
-            _service = service ?? throw new System.ArgumentNullException(nameof(service));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _service = service ?? throw new ArgumentNullException(nameof(service));
         }
 
         [HttpGet]
