@@ -63,6 +63,9 @@ namespace ASP_DotNET_WebAPI_Template
 
             services.ConfigureSwagger();
 
+            // Configuring CORS
+            services.ConfigureCors(Configuration);
+
             services.AddControllers();
         }
 
@@ -77,6 +80,9 @@ namespace ASP_DotNET_WebAPI_Template
             }
 
             app.UseHttpsRedirection();
+            app.UseRouting();
+
+            app.UseCors("AllowEverything");
 
             // Caching Middleware
             app.UseResponseCaching();
@@ -84,8 +90,6 @@ namespace ASP_DotNET_WebAPI_Template
 
             // Rate Limit Middleware
             app.UseIpRateLimiting();
-
-            app.UseRouting();
 
             // Authentication Middleware
             app.UseAuthentication();

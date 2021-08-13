@@ -29,3 +29,4 @@
 + Hangfire (with Dashboard)
   + SQL Server
 + Twilio SendGrid Email Service
++ Cross-Origin Resource Sharing (CORS)
